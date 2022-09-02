@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
-import {dijkstra, getNodesInShortestPathOrder} from '../algorithms/dijkstra';
+import { dijkstra, getNodesInShortestPathOrder } from '../algorithms/dijkstra';
+
 
 import './PathfindingVisualizer.css';
 
@@ -62,7 +63,7 @@ export default class PathfindingVisualizer extends Component {
           'node node-shortest-path';
       }, 50 * i);
       }
-      document.getElementById('reset').classList.add('isDisabled');
+      // document.getElementById('reset').classList.add('isDisabled');
       document.getElementById('visualize').classList.add('isDisabled');
   }
 
@@ -73,12 +74,10 @@ export default class PathfindingVisualizer extends Component {
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
+  reset() { 
+    window.location.reload();
   }
-
-    reset(){ 
-    const newGrid = getInitialGrid();
-    this.setState({ grid: newGrid });
-   }
   render() {
     const {grid, mouseIsPressed} = this.state;
 
@@ -117,7 +116,7 @@ export default class PathfindingVisualizer extends Component {
             </a>
         <a onClick={() => this.reset()} id = 'reset'>
             Reset
-        </a>
+            </a>
       </>
     );
   }
